@@ -43,7 +43,25 @@ function deploy_container() {
     LOG_INFO "Deploy tca container command:"
     set -x
     docker run -it --env TCA_INIT_DATA=$TCA_INIT_DATA \
-        --name $TCA_CONTAINER_NAME --publish 80:80 --publish 8000:8000 --publish 9001:9001 \
+        --name $TCA_CONTAINER_NAME --publish 8010:80 --publish 8000:8000 --publish 9001:9001 \
+        --add-host 140.82.113.4:github.com \
+        --add-host 140.82.113.4:central.github.com \
+        --add-host 140.82.113.4:assets-cdn.github.com \
+        --add-host 151.101.1.6:github.map.fastly.net \
+        --add-host 151.101.1.6:github.global.ssl.fastly.net \
+        --add-host 140.82.113.4:gist.github.com \
+        --add-host 185.199.108.153:github.io \
+        --add-host 140.82.113.4:github.com \
+        --add-host 140.82.113.4:api.github.com \
+        --add-host 140.82.113.4:codeload.github.com \
+        --add-host 72.21.206.80:github-cloud.s3.amazonaws.com \
+        --add-host 72.21.206.80:github-com.s3.amazonaws.com \
+        --add-host 72.21.206.80:github-production-release-asset-2e65be.s3.amazonaws.com \
+        --add-host 72.21.206.80:github-production-user-asset-6210df.s3.amazonaws.com \
+        --add-host 72.21.206.80:github-production-repository-file-5c1aeb.s3.amazonaws.com \
+        --add-host 185.199.108.153:githubstatus.com \
+        --add-host 140.82.114.18:github.community \
+        --add-host 140.82.113.4:raw.github.com \
         -v $TCA_DOCKER_LOG_PATH:/var/log/tca/ \
         -v $TCA_DOCKER_DATA_PATH:/var/opt/tca/ \
         -v $TCA_DOCKER_CONFIG_PATH:/etc/tca/ \
